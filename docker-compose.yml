@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  pdf_scraper_bot:
+    build: .
+    environment:
+      - API_TOKEN=6409256463:AAEQqGP7gS3xrSnJ-yUxc3HJVVuc9cuw4CM
+      - CHAT_ID=505635797
+    volumes:
+      - ./rrballlinks.txt:/app/rrballlinks.txt
