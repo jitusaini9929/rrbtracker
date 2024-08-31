@@ -1,15 +1,16 @@
-
+import os
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-import os
 import asyncio
 from aiogram import Bot
 
+# Get API token and chat ID from environment variables
+API_TOKEN = os.getenv('API_TOKEN')
+chat_id = os.getenv('CHAT_ID')
+
 # Set up Telegram bot
-API_TOKEN = '6409256463:AAEQqGP7gS3xrSnJ-yUxc3HJVVuc9cuw4CM'
 bot = Bot(token=API_TOKEN)
-chat_id = '505635797'
 
 # Set up user-agent string
 headers = {
@@ -38,8 +39,8 @@ urls = [
     'https://www.rrbpatna.gov.in/Default.aspx',
     'https://rrbranchi.gov.in/?p=packages',
     'https://rrbthiruvananthapuram.gov.in/'
-    
 ]
+
 known_pdf_links_file = 'rrballlinks.txt'
 known_pdf_links = set()
 
@@ -52,7 +53,7 @@ async def main():
         while True:
             for url in urls:
                 try:
-                    response = requests.get(url, headers=headers, timeout=10,verify=False)
+                    response = requests.get(url, headers=headers, timeout=10, verify=False)
                     soup = BeautifulSoup(response.content, 'html.parser')
                     links = soup.find_all('a', href=True)
 
